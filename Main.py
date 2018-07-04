@@ -2,7 +2,7 @@ import numpy as np
 import pandas as pd
 from scipy.optimize import leastsq
 import pylab as pl
-import Utilities as util
+import AnalysisUtilities as util
 
 x = np.arange(1, 28, 1)
 y = np.array([
