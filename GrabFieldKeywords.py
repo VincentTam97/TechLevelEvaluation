@@ -1,5 +1,6 @@
 import DatabaseUtilities as DU
-import csv
+import AnalysisUtilities as AU
+
 
 def generateCSVFiles():
     fields = ['人工智能', '智能制造', '大数据', '云计算', '工业互联网', '网络安全', '集成电路', '物联网']
@@ -27,15 +28,70 @@ def generateCSVFiles():
     return count_list
 
 
+# to test
+def collectTechNumber(order):
+    fields = ['人工智能', '智能制造', '大数据', '云计算', '工业互联网', '网络安全', '集成电路', '物联网']
+    keyword_count = generateCSVFiles()
+    this_field_number_collection = []
+    for top in range(8):
+        tech_num = DU.countTechNumber(fields[order], keyword_count[order][top][0])
+        this_field_number_collection.append(tech_num)
 
+    return this_field_number_collection
+
+
+# to test
+def collectPeriodResult(order):
+    fields = ['人工智能', '智能制造', '大数据', '云计算', '工业互联网', '网络安全', '集成电路', '物联网']
+    keyword_count = generateCSVFiles()
+    this_field_period_collection = []
+    for top in range(8):
+        tech_num = DU.countTechNumber(fields[order], keyword_count[order][top][0])
+        tech_period = AU.getAllPeriod(tech_num)
+        this_field_period_collection.append(tech_period)
+
+    return this_field_period_collection
+
+
+# to test
+def generateYearSeries(start_year, year_num):
+    year_list = []
+    for i in range(year_num):
+        year_list.append(i + start_year)
+
+    return year_list
+
+
+# to test
+def generateTechSeries(order):
+    keyword_count = generateCSVFiles()
+    tech_list = []
+    for top in range(8):
+        tech = keyword_count[order][top][0]
+        tech_list.append(tech)
+
+    return tech_list
+
+
+# to test
+def generateResultByField(order):
+    result_list = []
+
+    year_list = generateYearSeries(1990, 29)
+    tech_list = generateTechSeries(order)
+    tech_num_list = collectTechNumber(order)
+    period_list = collectPeriodResult(order)
+
+    result_list.append(year_list)
+    result_list.append(tech_list)
+    result_list.append(tech_num_list)
+    result_list.append(period_list)
+
+    print(result_list)
+    return result_list
 
 
 if __name__ == '__main__':
-    fields = ['人工智能', '智能制造', '大数据', '云计算', '工业互联网', '网络安全', '集成电路', '物联网']
-    keyword_count = generateCSVFiles()
-
     for i in range(8):
-        for top in range(8):
-            print(keyword_count[i][top][0])
-            tech_num = DU.countTechNumber(fields[1], keyword_count[i][top][0])
-            print(tech_num)
+        generateResultByField(i)
+

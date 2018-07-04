@@ -41,3 +41,4 @@ def countTechNumber(field, tech):
         tech_count.append(this_year_count)
 
     return tech_count
+

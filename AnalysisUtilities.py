@@ -7,7 +7,7 @@ import pylab as pl
 def predictWithPolyFunction(x, y):
     z = np.polyfit(x, y, 3)
     p = np.poly1d(z)
-    fu_x = np.arange(1, 28, 1)
+    fu_x = np.arange(1, 30, 1)
     fu_y = p(fu_x)
     return fu_y
 
@@ -85,3 +85,29 @@ def getPeriod4(y_pred):
             possible_candidates.loc[possible_candidates.shape[0]] = {'og_index': index, 'diff2': row[0]}
 
     return int(possible_candidates.iloc[possible_candidates['diff2'].idxmin()]['og_index'])
+
+
+# to test
+def getAllPeriod(num_y):
+    x = np.arange(1, 30, 1)
+    y = np.array(num_y)
+    y_pred = predictWithPolyFunction(x, y)
+    index_1 = getPeriod1(y_pred)
+    index_2 = getPeriod2(y_pred)
+    index_3 = getPeriod3(y_pred)
+    index_4 = getPeriod4(y_pred)
+
+    period_collection = []
+    for i in range(29):
+        if i == index_1:
+            period_collection.append("萌芽期")
+        elif i == index_2:
+            period_collection.append("成长期")
+        elif i == index_3:
+            period_collection.append("成熟期")
+        elif i == index_4:
+            period_collection.append("衰退期")
+        else:
+            period_collection.append("")
+
+    return period_collection
