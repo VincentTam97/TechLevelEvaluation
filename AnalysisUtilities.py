@@ -88,6 +88,33 @@ def getPeriod4(y_pred):
 
 
 # to test
+def verifyPeriod(index_1, index_2, index_3, index_4):
+    if index_1 < index_2 < index_3 < index_4:
+        return [1, 1, 1, 1]
+    elif index_1 < index_2 < index_3:
+        return [1, 1, 1, 0]
+    elif index_1 < index_2 < index_4:
+        return [1, 1, 0, 1]
+    elif index_1 < index_3 < index_4:
+        return [1, 0, 1, 1]
+    elif index_2 < index_3 < index_4:
+        return [0, 1, 1, 1]
+    elif index_1 < index_2:
+        return [1, 1, 0, 0]
+    elif index_1 < index_3:
+        return [1, 0, 1, 0]
+    elif index_1 < index_4:
+        return [1, 0, 0, 1]
+    elif index_2 < index_3:
+        return [0, 1, 1, 0]
+    elif index_2 < index_4:
+        return [0, 1, 0, 1]
+    elif index_3 < index_4:
+        return [0, 0, 1, 1]
+    else:
+        return [0, 0, 1, 0]
+
+
 def getAllPeriod(num_y):
     x = np.arange(1, 30, 1)
     y = np.array(num_y)
@@ -96,16 +123,21 @@ def getAllPeriod(num_y):
     index_2 = getPeriod2(y_pred)
     index_3 = getPeriod3(y_pred)
     index_4 = getPeriod4(y_pred)
+    verify_list = verifyPeriod(index_1, index_2, index_3, index_4)
+    index_list = [index_1, index_2, index_3, index_4]
+    for i in range(4):
+        if verify_list[i] == 0:
+            index_list[i] = 99
 
     period_collection = []
     for i in range(29):
-        if i == index_1:
+        if i == index_list[0]:
             period_collection.append("萌芽期")
-        elif i == index_2:
+        elif i == index_list[1]:
             period_collection.append("成长期")
-        elif i == index_3:
+        elif i == index_list[2]:
             period_collection.append("成熟期")
-        elif i == index_4:
+        elif i == index_list[3]:
             period_collection.append("衰退期")
         else:
             period_collection.append("")

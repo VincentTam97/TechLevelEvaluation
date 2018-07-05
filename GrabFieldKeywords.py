@@ -28,7 +28,6 @@ def generateCSVFiles():
     return count_list
 
 
-# to test
 def collectTechNumber(order):
     fields = ['人工智能', '智能制造', '大数据', '云计算', '工业互联网', '网络安全', '集成电路', '物联网']
     keyword_count = generateCSVFiles()
@@ -40,7 +39,6 @@ def collectTechNumber(order):
     return this_field_number_collection
 
 
-# to test
 def collectPeriodResult(order):
     fields = ['人工智能', '智能制造', '大数据', '云计算', '工业互联网', '网络安全', '集成电路', '物联网']
     keyword_count = generateCSVFiles()
@@ -53,7 +51,6 @@ def collectPeriodResult(order):
     return this_field_period_collection
 
 
-# to test
 def generateYearSeries(start_year, year_num):
     year_list = []
     for i in range(year_num):
@@ -62,7 +59,6 @@ def generateYearSeries(start_year, year_num):
     return year_list
 
 
-# to test
 def generateTechSeries(order):
     keyword_count = generateCSVFiles()
     tech_list = []
@@ -73,7 +69,6 @@ def generateTechSeries(order):
     return tech_list
 
 
-# to test
 def generateResultByField(order):
     result_list = []
 
@@ -92,6 +87,4 @@ def generateResultByField(order):
 
 
 if __name__ == '__main__':
-    for i in range(8):
-        generateResultByField(i)
-
+    generateTechSeries(1)
