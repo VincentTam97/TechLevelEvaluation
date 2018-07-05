@@ -99,14 +99,14 @@ def verifyPeriod(index_1, index_2, index_3, index_4):
         return [1, 0, 1, 1]
     elif index_2 < index_3 < index_4:
         return [0, 1, 1, 1]
+    elif index_2 < index_3:
+        return [0, 1, 1, 0]
     elif index_1 < index_2:
         return [1, 1, 0, 0]
     elif index_1 < index_3:
         return [1, 0, 1, 0]
     elif index_1 < index_4:
         return [1, 0, 0, 1]
-    elif index_2 < index_3:
-        return [0, 1, 1, 0]
     elif index_2 < index_4:
         return [0, 1, 0, 1]
     elif index_3 < index_4:
