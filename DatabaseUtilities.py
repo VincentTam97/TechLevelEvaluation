@@ -3,7 +3,7 @@ from pymongo import MongoClient
 
 def connectDatabase():
     client = MongoClient('localhost', 27017)
-    database = client['config']
+    database = client['data_warehouse']
     collection = database['yisuo_english_paper_done']
 
     return collection
@@ -13,10 +13,15 @@ def findKeywordsByThisField(field_require):
     collection = connectDatabase()
     articles = collection.find({'field': field_require})
     field_keyword_list = []
+    i = 0
     for article in articles:
         keywords = article['keywords'].split('; ')
-        #print(keywords)
-        field_keyword_list.extend(keywords)
+        if keywords != ['']:
+            i = i + 1
+            print('[' + str(i) + '] ' + str(keywords))
+            field_keyword_list.extend(keywords)
+        if len(field_keyword_list) > 50000:
+            break
 
     return field_keyword_list
 
@@ -32,6 +37,7 @@ def countTechNumber(field, tech):
     ]
     tech_count = []
     for year in years:
+        print(field + ':' + tech + ':' + year)
         this_year_count = 0
         articles = collection.find({'field': field, 'year': year})
         for article in articles:
@@ -39,6 +45,7 @@ def countTechNumber(field, tech):
             if tech in keywords:
                 this_year_count = this_year_count + 1
         tech_count.append(this_year_count)
+        print(this_year_count)
 
     return tech_count
 

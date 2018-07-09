@@ -10,7 +10,7 @@ y = np.array([
 ])
 
 y_pred = util.predictWithPolyFunction(x, y)
-start_year = 0
+start_year = 1990
 print(util.getPeriod1(y_pred) + start_year)
 print(util.getPeriod2(y_pred) + start_year)
 print(util.getPeriod3(y_pred) + start_year)
