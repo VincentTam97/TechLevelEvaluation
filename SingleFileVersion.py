@@ -28,7 +28,11 @@ def getPeriod1(y_pred):
         if index in candidate_indices:
             possible_candidates.loc[possible_candidates.shape[0]] = {'og_index': index, 'diff1': row[0]}
 
-    return int(possible_candidates.iloc[possible_candidates['diff1'].idxmin()]['og_index'])
+    possible_result = int(possible_candidates.iloc[possible_candidates['diff1'].idxmin()]['og_index'])
+    if possible_result % 2 != 0:
+        return possible_result-1
+    else:
+        return possible_result
 
 
 def getPeriod2(y_pred):
@@ -46,7 +50,11 @@ def getPeriod2(y_pred):
         if index in candidate_indices:
             possible_candidates.loc[possible_candidates.shape[0]] = {'og_index': index, 'diff1': row[0]}
 
-    return int(possible_candidates.iloc[possible_candidates['diff1'].idxmax()]['og_index'])
+    possible_result = int(possible_candidates.iloc[possible_candidates['diff1'].idxmax()]['og_index'])
+    if possible_result % 2 != 0:
+        return possible_result-1
+    else:
+        return possible_result
 
 
 def getPeriod3(y_pred):
@@ -66,7 +74,11 @@ def getPeriod3(y_pred):
                 'og_index': index, 'diff1': row[0], 'diff1_abs': abs(row[0])
             }
 
-    return int(possible_candidates.iloc[possible_candidates['diff1_abs'].idxmin()]['og_index'])
+    possible_result = int(possible_candidates.iloc[possible_candidates['diff1_abs'].idxmin()]['og_index'])
+    if possible_result % 2 != 0:
+        return possible_result-1
+    else:
+        return possible_result
 
 
 def getPeriod4(y_pred):
@@ -85,7 +97,11 @@ def getPeriod4(y_pred):
         if index in candidate_indices:
             possible_candidates.loc[possible_candidates.shape[0]] = {'og_index': index, 'diff2': row[0]}
 
-    return int(possible_candidates.iloc[possible_candidates['diff2'].idxmin()]['og_index'])
+    possible_result = int(possible_candidates.iloc[possible_candidates['diff2'].idxmin()]['og_index'])
+    if possible_result % 2 != 0:
+        return possible_result-1
+    else:
+        return possible_result
 
 
 def verifyPeriod(index_1, index_2, index_3, index_4):

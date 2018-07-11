@@ -143,3 +143,26 @@ def getAllPeriod(num_y):
             period_collection.append("")
 
     return period_collection
+
+
+def analyseDBContent():
+    fields = ['人工智能', '智能制造', '大数据', '云计算', '工业互联网', '网络安全', '集成电路', '物联网']
+    for i in range(8):
+        filename = str(i) + fields[i] + '_dbcontent.txt'
+        reader = open(filename, 'r')
+        line = reader.readline()
+        result_list = eval(line)
+        for j in range(8):
+            pre_time = result_list[3][j]
+            for item in pre_time:
+                if (item != '') and (pre_time.index(item)%2 != 0):
+                    if pre_time[pre_time.index(item)-1] == '':
+                        pre_time[pre_time.index(item)-1] = item
+                    pre_time[pre_time.index(item)+1] = ''
+            result_list[3][j] = pre_time
+        print(result_list)
+        result_str = str(result_list)
+        result_str = result_str.replace('\'', '\"')
+        result_str = result_str.replace(', ', ',')
+        writer = open(filename, 'w')
+        writer.write(result_str)
